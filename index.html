@@ -87,7 +87,7 @@ html,body{margin:0;background:var(--cFFFFFF)}
 <style id="pl">@media print{:root:not([data-pdf]) html,:root:not([data-pdf]) body{width:auto!important;min-width:0!important;height:auto!important;overflow:visible!important;margin:0!important}:root:not([data-pdf]) #frame,:root:not([data-pdf]) #frame2,:root:not([data-pdf]) .frame{display:block!important;position:relative!important;width:1056px!important;height:594px!important;overflow:hidden!important;break-inside:avoid;page-break-inside:avoid}:root:not([data-pdf]) #sheet,:root:not([data-pdf]) #sheet2,:root:not([data-pdf]) .frame>.sheet{position:absolute!important;top:0!important;left:0!important;width:2560px!important;height:1440px!important;transform:scale(.4125)!important;transform-origin:0 0!important;padding:0!important}:root:not([data-pdf]) #frame2,:root:not([data-pdf]) .frame+.frame{break-before:page;page-break-before:always}}</style>
 <style id="pf">@media print{:root:not([data-pdf]),:root:not([data-pdf])[data-theme]{--cFFFFFF:#FFFFFF!important;--cF5F5F5:#FFFFFF!important;--c0B0B0B:#000000!important;--c3F3F3F:#000000!important;--c6D6E71:#3A3A3A!important;--cDFDFDF:#FFFFFF!important;--cCBCBCB:#CBCBCB!important;--cED2B44:#ED2B44!important;--c2495C2:#2495C2!important;--c939598:#939598!important}:root:not([data-pdf]) body,:root:not([data-pdf]) #frame,:root:not([data-pdf]) #sheet,:root:not([data-pdf])[data-theme] body,:root:not([data-pdf])[data-theme] #frame,:root:not([data-pdf])[data-theme] #sheet{background:#FFFFFF!important;background-image:none!important}html{-webkit-print-color-adjust:exact;print-color-adjust:exact}}</style>
 </head>
-<body>
+<body><script id="zl">(function(){var d0=window.devicePixelRatio||1,R=null,mob=null;window.__ew=function(){return Math.round(document.documentElement.clientWidth*(window.devicePixelRatio||1)/d0);};function grab(){R=[];for(var i=0;i<document.styleSheets.length;i++){var c;try{c=document.styleSheets[i].cssRules}catch(e){continue}for(var j=0;j<c.length;j++){var x=c[j];if(x.media&&/max-width:\s*899px/.test(x.media.mediaText))R.push(x);}}}function mq(){if(!R)grab();var m=window.__ew()<900;if(m===mob)return;mob=m;R.forEach(function(x){x.media.mediaText=m?"screen":"not all";});}mq();window.addEventListener("resize",mq);})();</script>
 <div id="frame">
 <div id="sheet" style="position: absolute; top: 0; left: 0; width: 2560px; height: 1440px; transform-origin: 0 0; box-sizing: border-box; background: var(--cFFFFFF); color: var(--c0B0B0B); display: flex; flex-direction: column; padding: 0 64px">
 <div class="crop" style="top: 24px; left: 24px; border-top: 2px solid var(--c0B0B0B); border-left: 2px solid var(--c0B0B0B)" aria-hidden="true"></div>
@@ -532,14 +532,14 @@ html,body{margin:0;background:var(--cFFFFFF)}
   var f=document.getElementById('frame'), s=document.getElementById('sheet');
   var P=[[f,s],[document.getElementById('frame2'),document.getElementById('sheet2')]];
   function fit(pw){
-    var w=pw||document.documentElement.clientWidth;
+    var w=pw||window.__ew();
     P.forEach(function(q){ var F=q[0], Sh=q[1]; if(!F||!Sh) return;
       if(!pw && w<900){ Sh.style.transform=''; F.style.width=''; F.style.height=''; return; }
       var k=w/2560; Sh.style.transform='scale('+k+')'; F.style.width=w+'px'; F.style.height=(1440*k)+'px'; });
   }
   var bt=document.querySelector('.m-btns'), home=bt&&bt.parentNode, ph=document.createComment('buttons');
   if(bt) home.insertBefore(ph,bt);
-  function place(desk){ if(!bt) return; var mob=!desk && document.documentElement.clientWidth<900;
+  function place(desk){ if(!bt) return; var mob=!desk && window.__ew()<900;
     if(mob && bt.parentNode===home) s.appendChild(bt); else if(!mob && bt.parentNode!==home) home.insertBefore(bt,ph); }
   window.addEventListener('resize',function(){fit();place();}); fit(); place();
   window.addEventListener('beforeprint',function(){place(true);});
